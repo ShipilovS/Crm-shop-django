@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обработка заказа</title>
+</head>
+<body>
+    
+    {% block one %}
+    <h1>№ заказа {{process.id}}</h1>
+    <h1>№ товара {{process.key_product.id}}</h1>
+    <h1>Заказал: {{process.name}}</h1>
+    <h1>Название товара: {{process.key_product}}</h1>
+    <h1>Количество оставшегося товара: {{process.key_product}}</h1>
+    <h1>{{process.key_product_user}}</h1>
+    {% endblock one %}
+    
+
+</body>
+</html>

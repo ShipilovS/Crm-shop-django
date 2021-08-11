@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}CRM System{% endblock title %}</title>
+</head>
+
+<body>
+    {% block one %}
+
+    <table class="table table-bordered ">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Артикул</th>
+                <th scope="col">Название</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Изображение</th>
+                <th scope="col">Заказ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pr in products %}
+            <tr>
+                <th scope="row">{{ pr.id }}</th>
+                <td>{{ pr.title }}</td>
+                <td>{{ pr.description }}</td>
+                <td><img src="{{ pr.image.url }}" width="300" height="150"></td>
+                {% if user.is_authenticated %}
+                <td><a href="{% url 'make_order' pr.categories_foregin.slug  pr.id %}">Сделать заказ</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col"><img src="media/root_images/crm.jpg" width="400" height="290"></div>
+            <div class="col">Здесь описание Здесь описание Здесь описание Здесь описание Здесь описание Здесь описание </div>
+        </div>
+    </div>
+ 
+
+    {% endblock one %}
+
+
+
+
+</body>
+
+</html>

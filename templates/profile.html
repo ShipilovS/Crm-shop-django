@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Личный кабинет{% endblock title %}</title>
+</head>
+
+<body>
+    {% block one %}
+    <!-- <a href="{% url 'home_page' %}">На главную</a> -->
+
+    <h1>Личный кабинет</h1>
+    <p>Привет, {{ user.username }}</p>
+    <p>E_mail: {{ user.email }}</p>
+
+
+    {% if user.is_staff %}
+    <h1>ВЫ - сотрудник</h1>
+
+    <table class="table table-bordered ">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID заказа</th>
+                <th scope="col">ID товара</th>
+                <th scope="col">Название заказа</th>
+                <th scope="col">Инициалы</th>
+                <th scope="col">Email</th>
+                <th scope="col">Статус заказа</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sc in stuff_context %}
+            <tr>
+                <th scope="row">{{ sc.id }}</th>
+                <th scope="row">{{ sc.key_product.id }}</th>
+                <td>{{ sc.key_product }}</td>
+                <td>{{ sc.name }}</td>
+                <td>{{ sc.email }}</td>
+                <td><a href="{% url 'make_process' user.id sc.id %}">Обработать заказ</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+    {% else %}
+
+
+    <h2>Ваши заказы:</h2>
+
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <th scope="col">ID заказа</th>
+            <th scope="col">ID товара</th>
+            <th scope="col">Название товара</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Действие</th>
+            <th scope="col">Статус заказа</th>
+        </thead>
+        <tbody>
+            {% for sc in orders_user %}
+            <tr>
+                <th scope="row">{{sc.id}}</th>
+                <td>{{sc.key_product.id}}</th>
+                <td>{{sc.key_product.title}}</td>
+                <td>{{sc.key_product.price}}</td>
+                <td><a href="{% url 'delete_order' sc.id %}">удалить заказ</a></td>
+                <td>В пути</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+
+    {% endblock one %}
+</body>
+
+</html>

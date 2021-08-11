@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Заказ{% endblock title %}</title>
+</head>
+<body>
+    {% block one %}
+    <h1>Описание заказа:</h1>
+    
+    <p>Название товара: {{ info_prod.title }}</p>
+    <p>Описание товара: {{ info_prod.description }}</p>
+    <p>Изображение: <img src="{{ info_prod.image.url }}"></p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <!-- <h4>Ваши инициалы: <input type="text" name="username" value="{{ user.username }}" placeholder="Имя"></h4>
+        <h4>Ваш Email:  <input type="email" name="email" value="{{ user.email }}" placeholder="Email"></h4> -->
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                 <input type="text" name="username" value="{{ user.username }}"  class="form-control" placeholder="Имя пользователя"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                 <input type="email" name="email" value="{{ user.email }}" class="form-control" placeholder="E-mail"/>
+            </div>
+        </div>
+        <button class="btn btn-primary mt-4" type="submit">Отправить</button>
+    </form>
+    {% endblock one %}
+  
+</body>
+</html>
